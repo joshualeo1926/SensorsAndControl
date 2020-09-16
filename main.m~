@@ -27,12 +27,21 @@ controlls_dist = pid_distance.get_controlls(delta_dist)
 
 fetch.move(controls_rot, controls_dist)
 
+% FIGURE THIS SHIT OUT
+%  setup and run sim
+%  put fetch robot into sim
+%  send controlls to robot
+%  put a follower in sim
+%  send controlls to fo
+%  attach image to follow
+%  read images from fetch robot
+%  read lidar data from fetch robot
 
-%CLASS - image tracking
-%CLASS - distance tracking
-%CLASS - PID
-%CLASS - fetch
-    %CLASS - collision
+%CLASS - image tracking       - Josh
+%CLASS - distance tracking    - Jonathan 
+%CLASS - PID                  - Josh
+%CLASS - fetch                - Josh/Jonathan
+    %CLASS - collision        - Jonathan
 
 %CLASS - image tracking
     % tracker_located -> returns 1 if it can see the tracker, 0 if unfound
@@ -45,7 +54,6 @@ fetch.move(controls_rot, controls_dist)
     % move -> always execute action
     % collision_move -> returns 1 if suc, 0 if predicted collision 
 
-    
     
 %while running
     %if we can see tracker
