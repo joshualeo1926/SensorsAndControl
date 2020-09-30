@@ -7,4 +7,4 @@ Laser_1 = Laser();
 
 data1 = Fetch_1.get_laser_data();
 
-colCheck = Laser_1.check_collision(data1, 2)
+colCheck = Laser_1.return_distance(data1, 2)

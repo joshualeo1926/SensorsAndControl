@@ -28,6 +28,27 @@ classdef Laser
                 end
             end
         end
+        
+        function ReturnDistance = return_distance(self, laser_data, angle)
+            if angle < laser_data.AngleMin || angle > laser_data.AngleMax
+                % Return -1 if the angle is invalid
+                ReturnDistance = -1;
+            else
+                counter = size(laser_data.Ranges);
+                counter = counter(1);
+                
+                for i = 1:counter
+                    currentAngle = laser_data.AngleMin + (i * laser_data.AngleIncrement);
+                    
+                    if currentAngle == angle
+                        ReturnDistance = laser_data.Ranges(i);
+                    elseif currentAngle > angle
+                        ReturnDistance = laser_data.Ranges(i-1);
+                        break;
+                    end
+                end
+            end
+        end
     end
 end
 
