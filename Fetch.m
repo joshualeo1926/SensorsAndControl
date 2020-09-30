@@ -1,6 +1,7 @@
 classdef Fetch < handle
     properties
-       img_sub 
+       img_sub
+       laser_sub
     end
     
     methods
