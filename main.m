@@ -48,12 +48,11 @@ fetch.move(controls_rot, controls_dist)
     % get_delta -> returns some delta of rotation
     
 %CLASS - distance tracking
-    % get_dist(rot) -> returns distance reading at input rotation
+    % get_dist(rot[RADIAN]) -> returns distance reading at input rotation
     
 %CLASS - fetch
     % move -> always execute action
     % collision_move -> returns 1 if suc, 0 if predicted collision 
-
     
 %while running
     %if we can see tracker
