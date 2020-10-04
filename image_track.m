@@ -17,16 +17,17 @@ classdef image_track < handle
             [self.target_extracted_features, self.target_points] = extractFeatures(self.gry_target_image, target_features);
         end
         
-        function [target_found, x_err, x_pixel, y_pixel] = get_error(self, input_img)
+        function [target_found, x_err, x_pixel, y_pixel] = get_error(self, img_data)
+            input_img = readImage(img_data);
             input_gry_img = rgb2gray(input_img);
             input_features = detectSURFFeatures(input_gry_img);
             [input_extracted_features, input_points] = extractFeatures(input_gry_img, input_features);
             
-            matched_features = matchFeatures(self.target_extracted_features, input_extracted_features,'MaxRatio', 0.3, 'Unique', true );
+            matched_features = matchFeatures(self.target_extracted_features, input_extracted_features, 'MaxRatio', 0.3, 'Unique', true );
             target_matched_points = self.target_points(matched_features(:, 1), :);
             input_matched_features = input_points(matched_features(:, 2), :);
             
-            if input_matched_features.Count > 20
+            if input_matched_features.Count > 15
                 [tf, ~, ~, ~] = estimateGeometricTransform(target_matched_points, input_matched_features, 'affine');
        
                 bbox = [1, 1; ...
@@ -37,12 +38,12 @@ classdef image_track < handle
 
                 transformed_bbox = transformPointsForward(tf, bbox);
 
-                x_pixel = abs(((transformed_bbox(2, 1) + transformed_bbox(1, 1))/4) +...
-                                ((transformed_bbox(4, 1) + transformed_bbox(3, 1))/4));
-                y_pixel = abs(((transformed_bbox(2, 2) + transformed_bbox(4, 2))/4)  +...
-                                ((transformed_bbox(1, 2) + transformed_bbox(3, 2))/4));
+                x_pixel = round(abs(((transformed_bbox(2, 1) + transformed_bbox(1, 1))/4) +...
+                                ((transformed_bbox(4, 1) + transformed_bbox(3, 1))/4)));
+                y_pixel = round(abs(((transformed_bbox(2, 2) + transformed_bbox(4, 2))/4)  +...
+                                ((transformed_bbox(1, 2) + transformed_bbox(3, 2))/4)));
 
-                x_err = x_pixel - size(input_img, 2)/2;
+                x_err = (x_pixel - size(input_img, 2)/2)/640;
                 target_found = true;
                 
                 if self.debug
@@ -61,7 +62,6 @@ classdef image_track < handle
                 x_err = 9999;
                 target_found = false;
             end
-
         end
     end
 end
