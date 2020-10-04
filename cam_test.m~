@@ -15,12 +15,13 @@ for i=0:1
     img_features = detectSURFFeatures(gry_img);
     [img_extracted_features, img_points] = extractFeatures(gry_img, img_features);
     
-    matched_features = matchFeatures(target_extracted_features, img_extracted_features,'MaxRatio', 0.3, 'Unique', true );
+    matched_features = matchFeatures(target_extracted_features, img_extracted_features);
     
     matched_target_point = target_points(matched_features(:, 1), :);
     matched_img_point = img_points(matched_features(:, 2), :);
     
     if matched_img_point.Count > 20
+       
        [tf, ~, ~, status] = estimateGeometricTransform(matched_target_point, matched_img_point, 'affine');
        
        bbox = [1, 1; ...
@@ -41,19 +42,16 @@ for i=0:1
        bot_left_y = transformed_bbox(3, 2);
        bot_right_y = transformed_bbox(4, 2);
        
-       top_mid_x = ((top_right_x - top_left_x)/2) + top_left_x;
-       bot_mid_x = ((bot_right_x - bot_left_x)/2) + bot_left_x;
+       top_mid_x = (top_right_x - top_left_x)/2 + top_left_x;
+       bot_mid_x = (bot_right_x - bot_left_x)/2 + bot_left_x;
        
-       right_mid_y = ((top_right_y - bot_right_y)/2) + bot_right_y;
-       left_mid_y = ((top_left_y - bot_left_y)/2) + bot_left_y;
+       right_mid_y = ((top_right_y - bot_right_y)/2) - top_right_y;
+       left_mid_y = ((top_left_y - bot_left_y)/2 - top_left_y;
        
        mid_x = abs((top_mid_x + bot_mid_x)/2)
        mid_y = abs((right_mid_y + left_mid_y)/2)
        
-       mid_x = abs(((transformed_bbox(2, 1) + transformed_bbox(1, 1))/4) + ((transformed_bbox(4, 1) + transformed_bbox(3, 1))/4))
-       mid_y = abs(((transformed_bbox(2, 2) + transformed_bbox(4, 2))/4)  + ((transformed_bbox(1, 2) + transformed_bbox(3, 2))/4))
-       
-       x_error = mid_x - size(gry_img, 2)/2;
+       x_location = mid_x - size(gry_img, 2)/2
        
        marked = insertMarker(img,[mid_x mid_y] , 'color', 'red', 'size', 10);
        line(transformed_bbox(:, 1), transformed_bbox(:, 2), 'Color', 'y');
