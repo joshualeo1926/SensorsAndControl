@@ -14,10 +14,17 @@
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="headless" value="$(arg headless)"/>
-    <arg name="world_name" value="$(find fetch_gazebo)/worlds/assignment_empty_world.sdf"/>
+    
   </include>
 
   <!-- Oh, you wanted a robot? -->
   <include file="$(find fetch_gazebo)/launch/include/$(arg robot).launch.xml" />
+  <node name="turtlebot_spawn_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+  args="-file $(find turtlebot3_gazebo)/models/turtlebot3_burger/model.sdf
+        -sdf
+        -x 2.0 -y 0 -z 0
+        -R 0   -P 0 -Y 0
+        -model turtlebot3_burger"/>
+
 
 </launch>

@@ -2,7 +2,8 @@ classdef Fetch < handle
     properties
        img_sub
        laser_sub
-       control_pub
+       depth_sub
+       control_pub      
        control_msg
     end
     
@@ -12,6 +13,7 @@ classdef Fetch < handle
             rosinit;
             self.img_sub = rossubscriber('/head_camera/rgb/image_raw', 'sensor_msgs/Image');
             self.laser_sub = rossubscriber('/base_scan_raw', 'sensor_msgs/LaserScan');
+            self.depth_sub = rossubscriber('/head_camera/depth_registered/image_raw', 'sensor_msgs/Image');
             [self.control_pub, self.control_msg] = rospublisher('/cmd_vel', 'geometry_msgs/Twist');
             self.control_msg.Linear.X = 0;
             self.control_msg.Angular.Z = 0;
@@ -23,6 +25,10 @@ classdef Fetch < handle
         
         function laser_data = get_laser_data(self)
             laser_data = receive(self.laser_sub);
+        end
+        
+        function depth_data = get_depth_image(self)
+            depth_data = receive(self.depth_sub);
         end
         
         function linear_move(self, control)

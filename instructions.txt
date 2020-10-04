@@ -1,2 +1,4 @@
 source /home/josh/catkin_ws/devel/setup.bash
 roslaunch fetch_gazebo assignment_environment.launch
+roslaunch fetch_gazebo cube_teleop.launch
+

@@ -5,7 +5,7 @@ classdef image_track < handle
        target_extracted_features;
        target_points;
        debug;
-
+       fig
     end
     
     methods
@@ -15,6 +15,9 @@ classdef image_track < handle
             self.gry_target_image = imcomplement(uint8(255 * ceil(mat2gray(self.target_image))));
             target_features = detectSURFFeatures(self.gry_target_image);
             [self.target_extracted_features, self.target_points] = extractFeatures(self.gry_target_image, target_features);
+            fig_h = figure(1);
+            fig_h.WindowState = 'minimized';
+            
         end
         
         function [target_found, x_err, x_pixel, y_pixel] = get_error(self, img_data)
@@ -47,14 +50,15 @@ classdef image_track < handle
                 target_found = true;
                 
                 if self.debug
-                    figure(1);
+                    
                     marked = insertMarker(input_img, [x_pixel y_pixel] , 'color', 'red', 'size', 10);
                     line(transformed_bbox(:, 1), transformed_bbox(:, 2), 'Color', 'y');
                     imshow(marked);
+                    hold on;
 
-                    figure(2);
-                    showMatchedFeatures(self.gry_target_image, input_gry_img, target_matched_points, input_matched_features, 'montage');
-                    drawnow;
+                    %figure(2);
+                    %showMatchedFeatures(self.gry_target_image, input_gry_img, target_matched_points, input_matched_features, 'montage');
+                    %drawnow;
                 end
             else
                 x_pixel = 9999;

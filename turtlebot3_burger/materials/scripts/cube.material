@@ -1,0 +1,16 @@
+material mymaker/Diffuse
+{
+  recieve_shadow off
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+
+        texture cube.png
+
+      }
+    }
+  }
+}
