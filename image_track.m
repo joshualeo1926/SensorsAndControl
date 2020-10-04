@@ -30,15 +30,17 @@ classdef image_track < handle
                 [tf, ~, ~, ~] = estimateGeometricTransform(target_matched_points, input_matched_features, 'affine');
        
                 bbox = [1, 1; ...
-                	size(self.gry_target_image, 2), 1;...
-                    size(self.gry_target_image, 2), size(self.gry_target_image, 1);...
-                    1, size(self.gry_target_image, 1);...
-                    1, 1];
+                        size(self.gry_target_image, 2), 1;...
+                        size(self.gry_target_image, 2), size(self.gry_target_image, 1);...
+                        1, size(self.gry_target_image, 1);...
+                        1, 1];
 
                 transformed_bbox = transformPointsForward(tf, bbox);
 
-                x_pixel = abs(((transformed_bbox(2, 1) + transformed_bbox(1, 1))/4) + ((transformed_bbox(4, 1) + transformed_bbox(3, 1))/4));
-                y_pixel = abs(((transformed_bbox(2, 2) + transformed_bbox(4, 2))/4)  + ((transformed_bbox(1, 2) + transformed_bbox(3, 2))/4));
+                x_pixel = abs(((transformed_bbox(2, 1) + transformed_bbox(1, 1))/4) +...
+                                ((transformed_bbox(4, 1) + transformed_bbox(3, 1))/4));
+                y_pixel = abs(((transformed_bbox(2, 2) + transformed_bbox(4, 2))/4)  +...
+                                ((transformed_bbox(1, 2) + transformed_bbox(3, 2))/4));
 
                 x_err = x_pixel - size(input_img, 2)/2;
                 target_found = true;
@@ -47,7 +49,6 @@ classdef image_track < handle
                     figure(1);
                     marked = insertMarker(input_img, [x_pixel y_pixel] , 'color', 'red', 'size', 10);
                     line(transformed_bbox(:, 1), transformed_bbox(:, 2), 'Color', 'y');
-                    title('target_found');
                     imshow(marked);
 
                     figure(2);
