@@ -294,7 +294,7 @@
           <mesh>
             <uri>model://turtlebot3_burger/meshes/cubemesh.dae</uri>
             <!-- previous scale = 0.1 -->
-            <scale>0.75 0.75 0.75</scale>
+            <scale>0.5 0.5 0.5</scale>
           </mesh>
         </geometry>
         <material>
@@ -667,7 +667,7 @@
       <rpyOffset>0 -0 0</rpyOffset>
     </plugin>
     <plugin name='turtlebot3_burger_controller' filename='libgazebo_ros_diff_drive.so'>
-      <commandTopic>cmd_vel1</commandTopic>   <!-- prev=cmd_vel -->
+      <commandTopic>cmd_vel_marker</commandTopic>   <!-- prev=cmd_vel -->
       <odometryTopic>odom1</odometryTopic>    <!-- prev=odom -->
       <odometryFrame>odom1</odometryFrame>    <!-- prev=odom -->
       <odometrySource>world</odometrySource>

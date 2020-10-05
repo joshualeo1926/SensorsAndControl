@@ -52,7 +52,7 @@ classdef image_track < handle
                 if self.debug
                     
                     marked = insertMarker(input_img, [x_pixel y_pixel] , 'color', 'red', 'size', 10);
-                    title("target found")
+                    title("target_found")
                     imshow(marked);
                     hold on;
 
@@ -65,9 +65,7 @@ classdef image_track < handle
                 y_pixel = 9999;
                 x_err = 9999;
                 target_found = false;
-                title("searching")
-                imshow(input_gry_img);
-                hold on;
+                
             end
         end
     end
