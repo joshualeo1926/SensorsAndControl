@@ -21,9 +21,9 @@ for i=0:2000
         ang_control = ang_pid.get_control(x_err);
         
         depth_data = fetch_con.get_depth_image();
-        depth_image = readImage(depth_data);
-        dst = depth_image(y_pixel, x_pixel);
+        [dst, min_dist] = depth_sensor.get_distance(depth_data, x_pixel, y_pixel);
         dst_control = min(max(dst_pid.get_control(dst), -1), 1);
+        
         
         fetch_con.linear_move(-dst_control);
         fetch_con.angular_move(ang_control);
@@ -31,7 +31,7 @@ for i=0:2000
         last_found_time = cputime * 1000;
         
     elseif (cputime * 1000) - last_found_time >= re_aquire_window
-        fetch_con.angular_move(0.15);
+        fetch_con.angular_move(0.25);
         fetch_con.linear_move(0);
     end
 end
