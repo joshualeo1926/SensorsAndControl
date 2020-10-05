@@ -26,17 +26,17 @@ classdef image_track < handle
             input_features = detectSURFFeatures(input_gry_img);
             [input_extracted_features, input_points] = extractFeatures(input_gry_img, input_features);
             
-            matched_features = matchFeatures(self.target_extracted_features, input_extracted_features, 'MaxRatio', 0.3, 'Unique', true );
+            matched_features = matchFeatures(self.target_extracted_features, input_extracted_features, 'MaxRatio', 0.5, 'Unique', true );
             target_matched_points = self.target_points(matched_features(:, 1), :);
             input_matched_features = input_points(matched_features(:, 2), :);
             
-            if input_matched_features.Count > 15
+            if input_matched_features.Count > 10
                 [tf, ~, ~, ~] = estimateGeometricTransform(target_matched_points, input_matched_features, 'affine');
        
                 bbox = [1, 1; ...
-                        size(self.gry_target_image, 2), 1;...
-                        size(self.gry_target_image, 2), size(self.gry_target_image, 1);...
-                        1, size(self.gry_target_image, 1);...
+                        size(input_gry_img, 2), 1;...
+                        size(input_gry_img, 2), size(input_gry_img, 1);...
+                        1, size(input_gry_img, 1);...
                         1, 1];
 
                 transformed_bbox = transformPointsForward(tf, bbox);
@@ -61,13 +61,15 @@ classdef image_track < handle
                     %drawnow;
                 end
             else
-                x_pixel = 9999;
-                y_pixel = 9999;
+                x_pixel = size(input_gry_img, 1);
+                y_pixel = size(input_gry_img, 2);
                 x_err = 9999;
                 target_found = false;
-                title("searching")
-                imshow(input_gry_img);
-                hold on;
+                if self.debug
+                    title("searching")
+                    imshow(input_gry_img);
+                    hold on;
+                end
             end
         end
     end
