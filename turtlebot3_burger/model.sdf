@@ -69,7 +69,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>/home/maleen/catkin_ws/src/turtlebot3/turtlebot3_description/meshes/bases/burger_base.stl</uri>
+            <uri></uri>
           </mesh>
         </geometry>
         <material>
@@ -87,7 +87,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>/home/maleen/catkin_ws/src/turtlebot3/turtlebot3_description/meshes/sensors/lds.stl</uri>
+            <uri></uri>
           </mesh>
         </geometry>
         <material>
@@ -282,7 +282,7 @@
         </inertia>
         <pose frame=''>0 0 0 0 -0 0</pose>
       </inertial>
-      <pose frame=''>-0.138878 0.002256 1.148275 2e-05 -0.007706 3.14159</pose>
+      <pose frame=''>-0 0 1.148275 0 0 3.14159</pose>
       <gravity>1</gravity>
       <self_collide>0</self_collide>
       <kinematic>0</kinematic>
@@ -388,7 +388,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>/home/maleen/catkin_ws/src/turtlebot3/turtlebot3_description/meshes/wheels/left_tire.stl</uri>
+            <uri></uri>
           </mesh>
         </geometry>
         <material>
@@ -481,7 +481,7 @@
         <geometry>
           <mesh>
             <scale>0.001 0.001 0.001</scale>
-            <uri>/home/maleen/catkin_ws/src/turtlebot3/turtlebot3_description/meshes/wheels/right_tire.stl</uri>
+            <uri></uri>
           </mesh>
         </geometry>
         <material>
@@ -665,9 +665,9 @@
       <rpyOffset>0 -0 0</rpyOffset>
     </plugin>
     <plugin name='turtlebot3_burger_controller' filename='libgazebo_ros_diff_drive.so'>
-      <commandTopic>cmd_vel_marker</commandTopic>   <!-- prev=cmd_vel -->
-      <odometryTopic>odom1</odometryTopic>    <!-- prev=odom -->
-      <odometryFrame>odom1</odometryFrame>    <!-- prev=odom -->
+      <commandTopic>cmd_vel_marker</commandTopic>
+      <odometryTopic>odom1</odometryTopic>
+      <odometryFrame>odom1</odometryFrame>
       <odometrySource>world</odometrySource>
       <publishOdomTF>0</publishOdomTF>
       <robotBaseFrame>base_footprint</robotBaseFrame>

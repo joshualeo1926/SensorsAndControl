@@ -27,6 +27,7 @@ classdef depth_sense < handle
             end
             distance = depth_image(y_pixel, x_pixel);
             if self.debug
+                figure(3);
                 markedd = insertMarker(depth_image, [x_pixel y_pixel] , 'color', 'red', 'size', 10);
                 title("target found")
                 imshow(markedd);

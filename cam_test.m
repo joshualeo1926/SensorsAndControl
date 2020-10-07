@@ -2,7 +2,7 @@ close all;
 clear all;
 clc;
 
-target_dist = 1;
+target_dist = 1.25;
 collision_threshold = 0.25;
 
 fetch_con = Fetch();
@@ -10,14 +10,12 @@ tracker = image_track(false);
 depth_sensor = depth_sense(false);
 laser_sensor = Laser(collision_threshold);
 
-ang_pid = PID_controller(0, 3, 0, 0.5);
+ang_pid = PID_controller(0, 2, 0, 1);
 dst_pid = PID_controller(target_dist, 1.5, 0, 1);
 
-searching_angular_speed = 0;
-re_aquire_window = 10;
-
-last_ang_command = 0.3;
+last_ang_command = 1;
 last_lin_command = 0;
+
 for i=0:2000
     
     rgb_data = fetch_con.get_rgb_image();
@@ -39,7 +37,7 @@ for i=0:2000
             last_ang_command = ang_control;
             last_lin_command = -dst_control;
         else
-            fetch_con.angular_move(sign(last_ang_command)*0.35);
+            fetch_con.angular_move(sign(last_ang_command));
             fetch_con.linear_move(0);        
         end 
     else

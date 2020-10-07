@@ -15,8 +15,6 @@ classdef image_track < handle
             self.gry_target_image = imcomplement(uint8(255 * ceil(mat2gray(self.target_image))));
             target_features = detectSURFFeatures(self.gry_target_image);
             [self.target_extracted_features, self.target_points] = extractFeatures(self.gry_target_image, target_features);
-            fig_h = figure(1);
-            fig_h.WindowState = 'minimized';
             
         end
         
@@ -34,9 +32,9 @@ classdef image_track < handle
                 [tf, ~, ~, ~] = estimateGeometricTransform(target_matched_points, input_matched_features, 'affine');
        
                 bbox = [1, 1; ...
-                        size(input_gry_img, 2), 1;...
-                        size(input_gry_img, 2), size(input_gry_img, 1);...
-                        1, size(input_gry_img, 1);...
+                        size(self.gry_target_image, 2), 1;...
+                        size(self.gry_target_image, 2), size(self.gry_target_image, 1);...
+                        1, size(self.gry_target_image, 1);...
                         1, 1];
 
                 transformed_bbox = transformPointsForward(tf, bbox);
@@ -50,25 +48,28 @@ classdef image_track < handle
                 target_found = true;
                 
                 if self.debug
-                    
+                    figure(1);
                     marked = insertMarker(input_img, [x_pixel y_pixel] , 'color', 'red', 'size', 10);
+                    marked = insertMarker(marked, [transformed_bbox(1, 1) transformed_bbox(1, 2)] , 'color', 'yellow', 'size', 10);
+                    marked = insertMarker(marked, [transformed_bbox(2, 1) transformed_bbox(2, 2)] , 'color', 'yellow', 'size', 10);
+                    marked = insertMarker(marked, [transformed_bbox(3, 1) transformed_bbox(3, 2)] , 'color', 'yellow', 'size', 10);
+                    marked = insertMarker(marked, [transformed_bbox(4, 1) transformed_bbox(4, 2)] , 'color', 'yellow', 'size', 10);
+                    
                     title("target found")
                     imshow(marked);
-                    hold on;
 
                     %figure(2);
                     %showMatchedFeatures(self.gry_target_image, input_gry_img, target_matched_points, input_matched_features, 'montage');
-                    %drawnow;
+                    drawnow;
                 end
             else
-                x_pixel = size(input_gry_img, 1);
-                y_pixel = size(input_gry_img, 2);
+                x_pixel = size(input_gry_img, 1)/2;
+                y_pixel = size(input_gry_img, 2)/2;
                 x_err = 9999;
                 target_found = false;
                 if self.debug
                     title("searching")
                     imshow(input_gry_img);
-                    hold on;
                 end
             end
         end
