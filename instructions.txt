@@ -4,12 +4,12 @@ git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
 cd ~/catkin_ws
 catkin_make
 
-copy the node folder to ~catkin_ws/src/fetch_gazebo/fetch_gazebo
-copy "assignment_environment.launch" to "~/catkin_ws/src/fetch_gazebo/fetch_gazebo"
-copy "marker_control.launch" to "~/catkin_ws/src/fetch_gazebo/fetch_gazebo"
-copy the "tutle bot 3" folder from the git repo and replace the existing one in "~/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo"
+copy "node" folder from the git repo to ~catkin_ws/src/fetch_gazebo/fetch_gazebo
+copy "assignment_environment.launch" from the git repo to "~/catkin_ws/src/fetch_gazebo/fetch_gazebo"
+copy "marker_control.launch" from the git repo to "~/catkin_ws/src/fetch_gazebo/fetch_gazebo"
+copy "turtlebot3_burger" folder from the git repo and replace the existing one in "~/catkin_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models"
 
 source devel/setup.bash
 roslaunch fetch_gazebo assignment_environment.launch
-roslaunch fetch_gazebo cube_teleop.launch
+roslaunch fetch_gazebo marker_control.launch
 

@@ -27,7 +27,7 @@ classdef PID_controller < handle
         end
 
         function [output] = get_control(self, input_)
-            current_time = cputime * 1000;
+            current_time = cputime;
             d_t = current_time - self.last_time;
             error_ = self.set_point - input_;
             if isempty(self.last_time)

@@ -3,7 +3,7 @@ clear all;
 clc;
 
 target_dist = 1;
-collision_threshold = 0.5;
+collision_threshold = 0.25;
 
 fetch_con = Fetch();
 tracker = image_track(false);
@@ -11,7 +11,7 @@ depth_sensor = depth_sense(false);
 laser_sensor = Laser(collision_threshold);
 
 ang_pid = PID_controller(0, 3, 0, 0.5);
-dst_pid = PID_controller(target_dist, 1.5, 0, 0.15);
+dst_pid = PID_controller(target_dist, 1.5, 0, 1);
 
 searching_angular_speed = 0;
 re_aquire_window = 10;
@@ -28,8 +28,8 @@ for i=0:2000
     
     laser_data = fetch_con.get_laser_data();
     is_laser_collision = laser_sensor.check_collision(laser_data);
-    if min_dist >= collision_threshold && ~is_laser_collision  
-        if target_found
+    if min_dist >= collision_threshold && ~is_laser_collision
+        if target_found && ~isnan(dst)
             ang_control = ang_pid.get_control(x_err);
 
             dst_control = min(max(dst_pid.get_control(dst), -1), 1);
