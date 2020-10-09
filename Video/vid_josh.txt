@@ -4,6 +4,12 @@ to detect the marker in the environment we sample a RGB image from the fetch's R
 location the guider - maker_track.mkv (optional to use here or later - aux_2.mkv)
 Using this affine transform we are able to get the transformed four corners of the marker in the environment and find the center of it in pixel co-ordinates, which we then save for later to sample the distance from the RGB-D camera data. getting the horizontal (x) co-oridinates of the marker also allows us to get a error value that is proportinal to the difference between the fetchs'/cameras orientation and the markers, this error value will serve as the input to our PID that controlls the fetchs' angular velocity.
 
+- We use our transform to obtain the four corners of the marker
+- We then find the centre of the marker
+- This is saved for use with our depth sensor
+- The x co-ordinate of the marker is then used to obtain an error value between the Fetch and marker orientation
+- This feeds our PID to control the Fetch angular velocity
+
 RGB-D - aux_1.mkv
 using the pixel co-ordinated we found from the image tracking in the previouse step, we sample the RGB-D data to get the distance from the fetch to the center of the marker/guider, this distance is the error that will be used as the input to the PID that controlls the fetchs' linear velocity.
 
