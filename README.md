@@ -21,7 +21,6 @@ along with the Fetch_gazebo dependencies we also need the turtle bot dependencie
 - catkin_make
 
 From our GitHub repository
-- git clone https://github.com/joshualeo1926/SensorsAndControl.git
 - copy "node" folder from the git repo to ~/catkin_ws/src/fetch_gazebo/fetch_gazebo
 - copy "assignment_environment.launch" from the git repo to ~/catkin_ws/src/fetch_gazebo/fetch_gazebo
 - copy "marker_control.launch" from the git repo to ~/catkin_ws/src/fetch_gazebo/fetch_gazebo
