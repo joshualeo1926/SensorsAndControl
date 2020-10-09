@@ -2,91 +2,45 @@ close all;
 clear all;
 clc;
 
-rosshutdown;
-rosinit;
+target_dist = 1.25;
+collision_threshold = 0.25;
 
+fetch_con = Fetch();
+tracker = image_track(false);
+depth_sensor = depth_sense(false);
+laser_sensor = Laser(collision_threshold);
 
-pid_rotation(setpoint = 0 deg)
-pid_distance(setpoint = 1 meter)
+ang_pid = PID_controller(0, 2, 0, 1);
+dst_pid = PID_controller(target_dist, 1.5, 0, 1);
 
+last_ang_command = 1;
+last_lin_command = 0;
 
+while(1)
+    
+    rgb_data = fetch_con.get_rgb_image();
+    [target_found, x_err, x_pixel, y_pixel] = tracker.get_error(rgb_data);
 
-#####|#####  = 0 px
+    depth_data = fetch_con.get_depth_image();
+    [dst, min_dist] = depth_sensor.get_distance(depth_data, x_pixel, y_pixel);
+    
+    laser_data = fetch_con.get_laser_data();
+    is_laser_collision = laser_sensor.check_collision(laser_data);
+    if min_dist >= collision_threshold && ~is_laser_collision
+        if target_found && ~isnan(dst)
+            ang_control = ang_pid.get_control(x_err);
 
+            dst_control = min(max(dst_pid.get_control(dst), -1), 1);
 
-###|####### = -40 px 
-
-#######|### = 40 px
-
-
-delta_rot = tracker.get_rot()
-delta_dist = lidar.get_dist()
-
-controlls_rot = pid_rotation.get_controlls(delta_rot)
-controlls_dist = pid_distance.get_controlls(delta_dist)
-
-fetch.move(controls_rot, controls_dist)
-
-% FIGURE THIS SHIT OUT
-%  setup and run sim
-%  put fetch robot into sim
-%  send controlls to robot
-%  put a follower in sim
-%  send controlls to follower
-%  attach image to follow
-%  read images from fetch robot
-%  read lidar data from fetch robot
-
-%CLASS - image tracking       - Josh
-%CLASS - distance tracking    - Jonathan 
-%CLASS - PID                  - Josh
-%CLASS - fetch                - Josh/Jonathan
-    %CLASS - collision        - Jonathan
-
-%CLASS - image tracking
-    % tracker_located -> returns 1 if it can see the tracker, 0 if unfound
-    % get_delta -> returns some delta of rotation
-    
-%CLASS - distance tracking
-    % get_dist(rot[RADIAN]) -> returns distance reading at input rotation
-    
-%CLASS - fetch
-    % move -> always execute action
-    % collision_move -> returns 1 if suc, 0 if predicted collision 
-    
-%while running
-    %if we can see tracker
-        % flag = true
-        
-    %if flag == true
-        %figure out if we turn left or right
-        %figure out if we are too close or too far away
-        %see if anything is in the way or too close
-            % if not
-                % execute action
-            % else
-                % stop
-    %else
-        % rotate some ammount
-        % look for tracker
-        % if we can see tracker
-            % flag = true
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+            fetch_con.linear_move(-dst_control);
+            fetch_con.angular_move(ang_control);
+            last_ang_command = ang_control;
+            last_lin_command = -dst_control;
+        else
+            fetch_con.angular_move(sign(last_ang_command));
+            fetch_con.linear_move(0);        
+        end 
+    else
+        'avoiding upcomming collision'
+    end
+end
