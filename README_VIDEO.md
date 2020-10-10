@@ -1,8 +1,9 @@
-41014 - Sensors & Control - Video Summary
-------------------------------------------------
+# 41014 - Sensors & Control
 
+### Video Summary
 This video was made to showcase our learning over the course of the Sensors & Control final assessment. The video outlines all the key learning outcomes that result in a simulated fetch robot successfully following a guided marker, whilst responding to collisions as required.
 
+### Learning Outcomes
 We believe we have learned and implemented the following Sensors & Control techniques successfully:
 - Understanding of ROS topics, subscriber & publisher nodes, ROS framework and implementation with MATLAB.
 - Understanding of the Gazebo simulation environment
@@ -14,8 +15,9 @@ We believe we have learned and implemented the following Sensors & Control techn
 - Implementing a closed-loop control system.
 - 3D object construction & manipulation in the Gazebo simulation environment.
 
-VIDEO LINK: https://youtu.be/BUj7ECGF_18
+### Video Link (YouTube)
+LINK: https://youtu.be/BUj7ECGF_18
 
-VIDEO CONTRIBUTIONS:
-	Jonathan Wilde - 12545606 (50%) - Video capture, editing and final review
-	Joshua Leo - 12583567 (50%) - Video capture, scripting, feedback and final review
+### Contributions
+Jonathan Wilde - 12545606 (50%) - Video capture, editing and final review
+Joshua Leo - 12583567 (50%) - Video capture, scripting, feedback and final review
