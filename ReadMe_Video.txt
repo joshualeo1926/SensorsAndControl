@@ -1,5 +1,5 @@
-VIDEO SUMMARY
-------------------------
+41014 - Sensors & Control - Video Summary
+------------------------------------------------
 
 This video was made to showcase our learning over the course of the Sensors & Control final assessment. The video outlines all the key learning outcomes that result in a simulated fetch robot successfully following a guided marker, whilst responding to collisions as required.
 
@@ -17,5 +17,5 @@ We believe we have learned and implemented the following Sensors & Control techn
 VIDEO LINK: https://youtu.be/BUj7ECGF_18
 
 VIDEO CONTRIBUTIONS:
-	Jonathan Wilde (50%) - Video capture, editing and final review
-	Joshua Leo (50%) - Video capture, scripting, feedback and final review
+	Jonathan Wilde - 12545606 (50%) - Video capture, editing and final review
+	Joshua Leo - 12583567 (50%) - Video capture, scripting, feedback and final review

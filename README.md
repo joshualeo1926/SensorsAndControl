@@ -85,7 +85,7 @@ Jonathan Wilde - 12545606: 50%
 - Environment
 
 Joshua Leo - 125835687: 50%
-- Code stucture and class design
+- Code structure and class design
 - Main layout
 - Fetch class development
 - Image tacking class lead development
