@@ -19,5 +19,5 @@ We believe we have learned and implemented the following Sensors & Control techn
 LINK: https://youtu.be/BUj7ECGF_18
 
 ### Contributions
-Jonathan Wilde - 12545606 (50%) - Video capture, editing and final review
-Joshua Leo - 12583567 (50%) - Video capture, scripting, feedback and final review
+- Jonathan Wilde - 12545606 (50%) - Video capture, editing and final review
+- Joshua Leo - 12583567 (50%) - Video capture, scripting, feedback and final review
