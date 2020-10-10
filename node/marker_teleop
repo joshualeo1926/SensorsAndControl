@@ -123,9 +123,14 @@ if __name__=="__main__":
             if control_linear_vel > MAX_LIN_VEL:
 	        control_linear_vel = MAX_LIN_VEL
 
+	    if control_linear_vel < -MAX_LIN_VEL:
+	        control_linear_vel = -MAX_LIN_VEL
+
             if control_angular_vel > MAX_ANG_VEL:
 	        control_angular_vel = MAX_ANG_VEL
-	    
+
+	    if control_angular_vel < -MAX_ANG_VEL:
+	        control_angular_vel = -MAX_ANG_VEL
 	    twist = Twist()
             twist.linear.x = control_linear_vel;
 	    twist.linear.y = 0.0
