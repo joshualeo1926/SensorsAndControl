@@ -3,7 +3,7 @@ clear all;
 clc;
 
 target_dist = 1.25;
-collision_threshold = 0.25;
+collision_threshold = 0.5;
 
 fetch_con = Fetch();
 tracker = image_track(false);
