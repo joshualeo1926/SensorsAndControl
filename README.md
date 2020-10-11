@@ -1,5 +1,9 @@
 # 41014 Sensors and Control
 
+### Author Information
+Joshua Leo - 12583567 - Joshua.leo@student.uts.edu.au
+Jonathan Wilde - 12545606 - Jonathan.wilde@student.uts.edu.au
+
 ### Description
 This GitHub repository contains all of the necessary files and scripts to achieve the "Group project 1: Fetch following the path".
 Using ROS, and MATLAB we employ various sensing and control techniques learnt throughout this subject to complete the project brief.
@@ -12,11 +16,11 @@ some of these techniques are:
 - Passing data through ROS via subscriber and publishers
 
 ### Setup
-along with the Fetch_gazebo dependencies we also need the turtle bot dependencies
+In addition to Fetch_gazebo dependencies, we also need the turtle bot dependencies
 - cd ~/catkin_ws/src/
 - git clone https://github.com/ROBOTIS-GIT/turtlebot3.git
 - git clone https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
-- git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git ##
+- git clone https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
 - cd ~/catkin_ws
 - catkin_make
 
@@ -84,7 +88,7 @@ Jonathan Wilde - 12545606: 50%
 - Testing 
 - Environment
 
-Joshua Leo - 125835687: 50%
+Joshua Leo - 12583567: 50%
 - Code structure and class design
 - Main layout
 - Fetch class development

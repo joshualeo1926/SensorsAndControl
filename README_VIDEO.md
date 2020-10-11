@@ -1,5 +1,9 @@
 # 41014 - Sensors & Control
 
+### Author Information
+Joshua Leo - 12583567 - Joshua.leo@student.uts.edu.au
+Jonathan Wilde - 12545606 - Jonathan.wilde@student.uts.edu.au
+
 ### Video Summary
 This video was made to showcase our learning over the course of the Sensors & Control final assessment. The video outlines all the key learning outcomes that result in a simulated fetch robot successfully following a guided marker, whilst responding to collisions as required.
 
